@@ -25,7 +25,7 @@ type TodoState = {
   error: string | null;
 };
 
-export const fetchTodos = createAsyncThunk<Todo[], { rejectValue: string }>(
+export const fetchTodos = createAsyncThunk<Todo[]>(
   "todos/fetchTodos",
   async function (_, { rejectWithValue }) {
     const resp = await fetch(`https://cms.dev-land.host/api/tasks`, {
@@ -110,7 +110,7 @@ export const editTodoStatus = createAsyncThunk<
   });
 
   if (!resp.ok) {
-    return rejectWithValue("Failed to update Todo");
+    return rejectWithValue("Failed to update status");
   }
   const data = await resp.json();
   return data.data.id;
